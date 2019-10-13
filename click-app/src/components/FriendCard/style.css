@@ -47,3 +47,11 @@
 .card > .remove:hover {
   color: #d50000;
 }
+
+.shuffle{
+  height: 200px;
+  margin: 1rem;
+  
+  width: 5000px;
+
+}

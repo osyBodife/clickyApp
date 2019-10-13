@@ -8,7 +8,7 @@ class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
     friends,
-    clickedFriendIds: [],
+    FriendIds: [],
     TopScore: 0,
     Score: 0,
     Message: "",
@@ -26,23 +26,37 @@ class App extends Component {
     const newfriends = this.state.friends.sort(() => Math.random() - 0.5);
     this.setState({ newfriends });
   };
+//make function
+checkWinning = () =>{
+  if(this.state.Score === this.state.TopScore){
+    this.setState({     
+      Message: "You have have won. Click to play again!"
+    }); 
+    
+  }
+}
+ 
+  handleClick = function(clicked_id){
+   //console.log(clicked_id);
+    let clickedFriends = this.state.FriendIds;
+  if(clickedFriends.includes(clicked_id)===true){
+    //if ((clickedFriends.indexOf(clicked_id) > -1) === true){
+     this.setState({
+       Score: this.state.Score - this.state.Score,
+       Message: "You guessed incorrectly. Click to play again!"
+     });    
 
-  handleClicky = () => {
+   }else{
+     this.setState({
+       TopScore: this.state.TopScore + 1,
+       Score: this.state.Score + 1,
+       Message: "You guessed correctly.!",
+       FriendIds:this.state.FriendIds.push(clicked_id)
+       
+     });
+    this.checkWinning();
 
-
-    if (this.state.CardValue === 1) {      
-      this.setState({
-        TopScore: this.state.TopScore + 1,
-        Score: this.state.Score + 1,        
-        clickedFriendIds: this.state.clickedFriendIds.push(this.friend.Id)
-      
-      });
-    } else {
-      this.setState({
-        Score: (this.state.Score - this.state.Score),
-        CardValue: (this.state.CardValue + 1)
-      });
-    }
+   }
     this.handleArrayShuffle();
   };
 
@@ -55,22 +69,31 @@ class App extends Component {
             <li>Clicky Game</li>
 
             <li>Click on image to begin</li>
+            <li>{this.state.Message}</li>
             <li>
               Score:{this.state.Score} | Top Score :{this.state.TopScore}
             </li>
           </ul>
         </Header>
        
-        {this.state.friends.map(friend => (                   
-          <button onClick={this.handleClicky} >
+        {this.state.friends.map(friend => (   
+         
+          <button onClick={() => this.handleClick(friend.id)} >
+          <>
           <FriendCard
-           
-            id={friend.id}
-            key={friend.id}  
-            image={friend.image}
+             
+              id={friend.id}
+              key={friend.id}
+              name={friend.name}
+              image={friend.image}
+              
+ 
+
             
           />
+          </>
           </button>
+         
         ))}
        
       </Wrapper>
