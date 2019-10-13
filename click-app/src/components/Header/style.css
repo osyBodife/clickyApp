@@ -1,0 +1,19 @@
+.header {
+  width: 100%;  
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: rgb(229, 233, 236);
+  margin-bottom: 50px;
+  height: 100px;
+  background-color: rgb(26, 12, 12);
+
+}
+ul{
+   list-style:none ;
+ display: block;
+}
+
+li {
+  display: inline;
+  margin-left: 100px;
+}
