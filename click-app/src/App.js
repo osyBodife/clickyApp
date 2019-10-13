@@ -8,10 +8,11 @@ class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
     friends,
+    clickedFriendIds: [],
     TopScore: 0,
     Score: 0,
     Message: "",
-    CardVal: 1
+   
   };
 
   // removeFriend = id => {
@@ -27,11 +28,13 @@ class App extends Component {
   };
 
   handleClicky = () => {
-    if (this.state.CardValue === 1) {
+
+
+    if (this.state.CardValue === 1) {      
       this.setState({
         TopScore: this.state.TopScore + 1,
-        Score: this.state.Score + 1,
-        CardValue: (this.state.CardValue -1)
+        Score: this.state.Score + 1,        
+        clickedFriendIds: this.state.clickedFriendIds.push(this.friend.Id)
       
       });
     } else {
@@ -57,9 +60,9 @@ class App extends Component {
             </li>
           </ul>
         </Header>
-        <button onClick={this.handleClicky} >
+       
         {this.state.friends.map(friend => (                   
-         
+          <button onClick={this.handleClicky} >
           <FriendCard
            
             id={friend.id}
@@ -67,8 +70,9 @@ class App extends Component {
             image={friend.image}
             
           />
+          </button>
         ))}
-        </button>
+       
       </Wrapper>
     );
   }
