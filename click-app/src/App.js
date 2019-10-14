@@ -14,12 +14,6 @@ class App extends Component {
     Message: ""
   };
 
-  // removeFriend = id => {
-  //   // Filter this.state.friends for friends with an id not equal to the id being removed
-  //   const friends = this.state.friends.filter(friend => friend.id !== id);
-  //   // Set this.state.friends equal to the new friends array
-  //   this.setState({ friends });
-  // };
 
   handleArrayShuffle = () => {
     const newfriends = this.state.friends.sort(() => Math.random() - 0.5);
@@ -41,7 +35,7 @@ class App extends Component {
       //if ((clickedFriends.indexOf(clicked_id) > -1) === true){
       this.setState({
         Score: this.state.Score - this.state.Score,
-        Message: "You guessed incorrectly. Click to play again!"
+        Message: "You guessed incorrectly.Click to play again!"
       });
     } else {
       this.setState({
