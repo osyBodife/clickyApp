@@ -6,6 +6,8 @@ import friends from "./friends.json";
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
+  // constructor(props) {
+  //   super(props);
   state = {
     friends,
     FriendIds: [],
@@ -20,20 +22,27 @@ class App extends Component {
     this.setState({ newfriends });
   };
   //make a winning function
-  checkWinning = () => {
-    if (this.state.TopScore === 12) {
+  checkWinning = () => {    
+    if (this.state.FriendIds.length === 12) {
       this.setState({
-        Message: "You have have won. Click to play again!"
+        Message: "You have have won. Click to play again!",
+        FriendIds:[]
       });
     }
   };
 
-  handleClick = function(clicked_id) {
-    //console.log(clicked_id);
-    let clickedFriends = this.state.FriendIds;
-    if (clickedFriends.includes(clicked_id) === true) {
+  handleClick = (clickedId)=> {
+    //console.log(clickedId);
+     //check if friends Id has being clicked against array containing Ids   
+    let IdExists = this.state.FriendIds.includes(clickedId);    
+      if(IdExists === true){
       //if ((clickedFriends.indexOf(clicked_id) > -1) === true){
       this.setState({
+        //if the id exists, which means the image has been clicked
+        //empty the array
+        //reset Score to zero
+        //send a message player that s/he guessed incorrectly
+        FriendIds: [],
         Score: this.state.Score - this.state.Score,
         Message: "You guessed incorrectly.Click to play again!"
       });
@@ -42,7 +51,7 @@ class App extends Component {
         TopScore: this.state.TopScore + 1,
         Score: this.state.Score + 1,
         Message: "You guessed correctly.!",
-        FriendIds: this.state.FriendIds.push(clicked_id)
+        FriendIds: this.state.FriendIds.push(clickedId)
       });
       this.checkWinning();
     }
