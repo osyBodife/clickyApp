@@ -11,8 +11,7 @@ class App extends Component {
     FriendIds: [],
     TopScore: 0,
     Score: 0,
-    Message: "",
-   
+    Message: ""
   };
 
   // removeFriend = id => {
@@ -22,41 +21,37 @@ class App extends Component {
   //   this.setState({ friends });
   // };
 
-  handleArrayShuffle = () => {    
+  handleArrayShuffle = () => {
     const newfriends = this.state.friends.sort(() => Math.random() - 0.5);
     this.setState({ newfriends });
   };
-//make function
-checkWinning = () =>{
-  if(this.state.Score === this.state.TopScore){
-    this.setState({     
-      Message: "You have have won. Click to play again!"
-    }); 
-    
-  }
-}
- 
-  handleClick = function(clicked_id){
-   //console.log(clicked_id);
+  //make a winning function
+  checkWinning = () => {
+    if (this.state.TopScore === 12) {
+      this.setState({
+        Message: "You have have won. Click to play again!"
+      });
+    }
+  };
+
+  handleClick = function(clicked_id) {
+    //console.log(clicked_id);
     let clickedFriends = this.state.FriendIds;
-  if(clickedFriends.includes(clicked_id)===true){
-    //if ((clickedFriends.indexOf(clicked_id) > -1) === true){
-     this.setState({
-       Score: this.state.Score - this.state.Score,
-       Message: "You guessed incorrectly. Click to play again!"
-     });    
-
-   }else{
-     this.setState({
-       TopScore: this.state.TopScore + 1,
-       Score: this.state.Score + 1,
-       Message: "You guessed correctly.!",
-       FriendIds:this.state.FriendIds.push(clicked_id)
-       
-     });
-    this.checkWinning();
-
-   }
+    if (clickedFriends.includes(clicked_id) === true) {
+      //if ((clickedFriends.indexOf(clicked_id) > -1) === true){
+      this.setState({
+        Score: this.state.Score - this.state.Score,
+        Message: "You guessed incorrectly. Click to play again!"
+      });
+    } else {
+      this.setState({
+        TopScore: this.state.TopScore + 1,
+        Score: this.state.Score + 1,
+        Message: "You guessed correctly.!",
+        FriendIds: this.state.FriendIds.push(clicked_id)
+      });
+      this.checkWinning();
+    }
     this.handleArrayShuffle();
   };
 
@@ -75,27 +70,19 @@ checkWinning = () =>{
             </li>
           </ul>
         </Header>
-       
-        {this.state.friends.map(friend => (   
-         
-          <button onClick={() => this.handleClick(friend.id)} >
-          <>
-          <FriendCard
-             
-              id={friend.id}
-              key={friend.id}
-              name={friend.name}
-              image={friend.image}
-              
- 
 
-            
-          />
-          </>
+        {this.state.friends.map(friend => (
+          <button onClick={() => this.handleClick(friend.id)}>
+            <>
+              <FriendCard
+                id={friend.id}
+                key={friend.id}
+                name={friend.name}
+                image={friend.image}
+              />
+            </>
           </button>
-         
         ))}
-       
       </Wrapper>
     );
   }
